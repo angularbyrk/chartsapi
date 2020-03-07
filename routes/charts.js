@@ -14,6 +14,21 @@ mongoDB.connect("mongodb+srv://student1:student@cluster0-ayjgg.mongodb.net/test"
     db = client.db("charts");
 });
 
+router.get("/",function(req,resp){
+	let sendUI = `
+		<html>
+			<body>
+				<ul>
+					<li><a href='yearWiseData'>years</a></li>
+					<li><a href='courseWiseJobsData'>jobs</a></li>
+					<li><a href='courseRegYearsWiseData/2020'>course</a></li>
+				</ul>
+			</body>
+		</html>
+	`;
+    resp.send(sendUI);
+});
+
 router.get("/yearWiseData",function(req,resp){
     db.collection("registration").find().toArray(function(err,results){
         if(err){
